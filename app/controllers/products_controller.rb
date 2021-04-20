@@ -1,4 +1,4 @@
-require 'csv'
+require './app/reportes/product_csv.rb'
 class ProductsController < ApplicationController
     def index
         @products = Product.all  
@@ -37,14 +37,15 @@ class ProductsController < ApplicationController
     end
 
     def csv
-        csv_string = CSV.generate do |csv|
-            csv << ["id","nombre", "descripcion", "precio", "tipo"]
-            Product.all.each do |x|
-                csv << [x.id, x.name, x.description, x.price, x.tipo.name]
-            end
-            csv
-        end
-        send_data csv_string,
+        
+        #csv_string = CSV.generate do |csv|
+        #    csv << ["id","nombre", "descripcion", "precio", "tipo"]
+        #    Product.all.each do |x|
+        #        csv << [x.id, x.name, x.description, x.price, x.tipo.name]
+        #    end
+        #    csv
+        #end
+        send_data ProductCsv.new.call,
         :type => 'text/csv; charset=iso-8859-1; header=present',
         :disposition => "attachment; filename=productos.csv"
     end
