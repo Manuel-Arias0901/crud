@@ -1,0 +1,34 @@
+<h2>Listado de Productos</h2>
+
+<p><%= link_to "Tipos de productos", tipos_path%></p>
+<p><%= link_to "Agregar", new_product_path%></p>
+
+<table>
+    <tr>
+        <thead>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Tipo</th>
+            <th>Accion</th>
+        </thead>
+    </tr>
+    <% @products.each do |product| %>
+        <tr>
+            <td><%= product.name %></td>
+            <td><%= product.description %></td>
+            <td><%= product.price %></td>
+            <td><%= product.tipo.name%></td>
+            <td>
+                <%= link_to "Editar", edit_product_path(product)%>
+                <%= link_to "Eliminar", product, method: :delete, data: {confirm: "Desea eliminar este registro?"} %>
+            </td>
+        </tr>
+    <%end%>
+
+</table>
+<br><br>
+
+
+<p><%= link_to "Imprimir CSV",  {:action=>'csv'} %></p>
+<p><%= link_to "Imprimir PDF"%></p>

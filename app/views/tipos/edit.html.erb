@@ -1,0 +1,14 @@
+<%= form_for @tipo do |f|%>
+    <div>
+        <%= f.label :Nombre%>
+        <%= f.text_field :name%>
+    </div>
+    <div>
+        <%= f.label :Descripcion%>
+        <%= f.text_area :description%>
+    </div>
+    <div>
+        <p><%= f.submit%></p>
+    </div>
+    <p><%= link_to "Regresar", tipos_path%></p>
+<%end%>
