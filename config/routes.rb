@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :products do 
     collection do 
       get :csv
+      get :pdf
     end
   end
   root 'products#index'

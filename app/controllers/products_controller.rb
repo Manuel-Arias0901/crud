@@ -1,4 +1,5 @@
 require './app/reportes/product_csv.rb'
+require './app/reportes/product_pdf.rb'
 class ProductsController < ApplicationController
     def index
         @products = Product.all  
@@ -37,19 +38,26 @@ class ProductsController < ApplicationController
     end
 
     def csv
-        
-        #csv_string = CSV.generate do |csv|
-        #    csv << ["id","nombre", "descripcion", "precio", "tipo"]
-        #    Product.all.each do |x|
-        #        csv << [x.id, x.name, x.description, x.price, x.tipo.name]
-        #    end
-        #    csv
-        #end
         send_data ProductCsv.new.call,
         :type => 'text/csv; charset=iso-8859-1; header=present',
         :disposition => "attachment; filename=productos.csv"
     end
-    
+
+    def pdf
+
+        pdf = ProductPdf.new.call
+        send_data pdf.render,
+            filename: "export.pdf",
+            type: 'application/pdf',
+            disposition: 'inline'
+       
+        
+        #send_data ProductPdf.new.call,
+        #:type => 'application/pdf', 
+        #:disposition => 'inline', 
+        #:filename => 'test.pdf'
+    end
+        
     private
         def params_product
             params.require(:product).permit(:name, :description, :price, :tipo_id.name)
