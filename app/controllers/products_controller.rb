@@ -50,12 +50,7 @@ class ProductsController < ApplicationController
             filename: "export.pdf",
             type: 'application/pdf',
             disposition: 'inline'
-       
-        
-        #send_data ProductPdf.new.call,
-        #:type => 'application/pdf', 
-        #:disposition => 'inline', 
-        #:filename => 'test.pdf'
+
     end
         
     private
