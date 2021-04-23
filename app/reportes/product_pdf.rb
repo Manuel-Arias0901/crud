@@ -24,6 +24,7 @@ class ProductPdf
                 text_box 'Precio', at: [400, cursor], style: :bold
                 text_box 'Tipo', at: [480, cursor], style: :bold
                 move_down 20
+                p "Holiii"
 
                 Product.all.each do |x|
                     text_box x.id.to_s, at: [20, cursor]
